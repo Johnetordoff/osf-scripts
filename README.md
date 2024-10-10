@@ -18,3 +18,8 @@ You can create personal access tokens with the appropriate scope at:
 ### Configuring the `.env` File
 
 Add your personal access token and any other required environment variables to the `.env` file. For example:
+
+
+### More Doc
+
+https://developer.osf.io/

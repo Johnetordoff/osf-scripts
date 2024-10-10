@@ -1,6 +1,9 @@
 import os
 from dotenv import load_dotenv
 
+HERE = os.path.split(os.path.abspath(__file__))[0]
+
+
 def create_env_file():
     # Define test values
     test_values = {
@@ -10,7 +13,7 @@ def create_env_file():
     }
 
     # Create and write test values to the .env file
-    with open('../.env', 'w') as env_file:
+    with open(os.path.join(HERE, '.env'), 'w') as env_file:
         for key, value in test_values.items():
             env_file.write(f"{key}={value}\n")
     print(".env file was missing and has been created with test values.")
@@ -18,7 +21,7 @@ def create_env_file():
 
 def get_credentials():
     # Check if the .env file exists
-    if not os.path.exists('../.env'):
+    if not os.path.exists(os.path.join(HERE, '.env')):
         create_env_file()
 
     # Load the environment variables from the .env file

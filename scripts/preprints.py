@@ -1,5 +1,8 @@
+import os
 import requests
 from scripts import urls, waterbutler_urls
+
+HERE = os.path.split(os.path.abspath(__file__))[0]
 
 
 def create_new_preprint(env, attributes, token):
@@ -112,7 +115,8 @@ def upload_file_to_preprint(env, preprint_id, file_path, file_name, token):
     base_url = waterbutler_urls[env]
     # Append query parameters for uploading
     # Read the file data
-    with open(file_path, 'rb') as f:
+
+    with open(os.path.join(HERE, file_path), 'rb') as f:
         file_data = f.read()
 
     # Headers
