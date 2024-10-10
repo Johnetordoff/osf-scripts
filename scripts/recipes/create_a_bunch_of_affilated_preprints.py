@@ -150,8 +150,8 @@ def main():
                 'description': 'This is the first preprint',
                 'provider': 'osf',
             },
-            'license_id': '59bac33acb0c480001872bc8',
-            'subject_ids': [['59c152d305ce91001c0242b4']],
+            'license_id': '59bac33acb0c480001872bc8',  # https://api.staging3.osf.io/v2/licenses/
+            'subject_ids': [['59c152d305ce91001c0242b4']], # https://api.staging3.osf.io/v2/subjects/
             'file_path': 'fixtures/test1.txt',
             'file_name': 'test1.txt',
             'institution_ids': ['cos', 'yls']

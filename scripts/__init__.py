@@ -1,5 +1,4 @@
 import os
-from dotenv import load_dotenv
 
 HERE = os.path.split(os.path.abspath(__file__))[0]
 
@@ -20,21 +19,15 @@ def create_env_file():
 
 
 def get_credentials():
-    # Check if the .env file exists
-    if not os.path.exists(os.path.join(HERE, '.env')):
-        create_env_file()
-
-    # Load the environment variables from the .env file
-    load_dotenv()
-
-    token = os.getenv('TOKEN')
-    username = os.getenv('USERNAME')
-    password = os.getenv('PASSWORD')
+    # Check if the environment variables are set, else use fallback values
+    token = os.getenv('TOKEN', 'test_token')  # Fallback to 'test_token' if TOKEN is not found
+    username = os.getenv('USERNAME', 'test_username')  # Fallback to 'test_username'
+    password = os.getenv('PASSWORD', 'test_password')  # Fallback to 'test_password'
 
     return token, username, password
 
-token, username, password = get_credentials()
 
+token, username, password = get_credentials()
 
 urls = {
     'production': 'https://api.osf.io/v2/',  # Production V2
