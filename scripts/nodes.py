@@ -1,5 +1,5 @@
 import requests
-from scripts import token, urls
+from scripts import urls
 
 
 # Create a new node (project or component)

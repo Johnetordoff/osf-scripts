@@ -1,11 +1,20 @@
 import requests
-from scripts import urls, token
+from scripts import urls
 
 
-def get_addon(env, node_id, provider_id, token, auth=None):
+def get_addons(env, token):
+    return requests.get(
+        f'{urls[env]}/addons/',
+        headers={
+            'Content-Type': 'application/vnd.api+json',
+            'Authorization': f'Bearer {token}'
+        }
+    )
+
+
+def get_node_addon(env, node_id, provider_id, token):
     return requests.get(
         f'{urls[env]}nodes/{node_id}/addons/{provider_id}/',
-        auth=auth,
         headers={
             'Content-Type': 'application/vnd.api+json',
             'Authorization': f'Bearer {token}'
@@ -13,10 +22,9 @@ def get_addon(env, node_id, provider_id, token, auth=None):
     )
 
 
-def get_addons(env, node_id, token, auth=None):
+def get_node_addons(env, node_id, token):
     return requests.get(
-        f'{urls[env]}nodes/{node_id}/addons/?page[size]=100',
-        auth=auth,
+        f'{urls[env]}nodes/{node_id}/addons/',
         headers={
             'Content-Type': 'application/vnd.api+json',
             'Authorization': f'Bearer {token}'
@@ -24,10 +32,9 @@ def get_addons(env, node_id, token, auth=None):
     )
 
 
-def update_addon(env, node_id, provider_id, token, payload, auth=None):
+def update_node_addon(env, node_id, provider_id, token, payload):
     return requests.patch(
         f'{urls[env]}nodes/{node_id}/addons/{provider_id}/',
-        auth=auth,
         headers={
             'Content-Type': 'application/vnd.api+json',
             'Authorization': f'Bearer {token}'
@@ -36,10 +43,9 @@ def update_addon(env, node_id, provider_id, token, payload, auth=None):
     )
 
 
-def add_addon(env, node_id, provider_id, token, auth=None):
+def add_node_addon(env, node_id, provider_id, token):
     return requests.post(
         f'{urls[env]}nodes/{node_id}/addons/{provider_id}/',
-        auth=auth,
         headers={
             'Content-Type': 'application/vnd.api+json',
             'Authorization': f'Bearer {token}'
@@ -47,24 +53,22 @@ def add_addon(env, node_id, provider_id, token, auth=None):
     )
 
 
-def post_addon(env, node_id, provider_id, token, auth=None):
-    payload = {
-        'data': {
-            'relationships': {
-                'provider': {
-                    'data': {
-                        'id': provider_id,
-                        'type': 'addons',
-                    },
-                }
-            },
-            'type': 'nodes',
-        },
-    }
+def post_addon(env, node_id, provider_id, token):
     return requests.post(
         f'{urls[env]}nodes/{node_id}/addons/',
-        auth=auth,
-        json=payload,
+        json={
+            'data': {
+                'relationships': {
+                    'provider': {
+                        'data': {
+                            'id': provider_id,
+                            'type': 'addons',
+                        },
+                    }
+                },
+                'type': 'nodes',
+            },
+        },
         headers={
             'Content-Type': 'application/vnd.api+json',
             'Authorization': f'Bearer {token}'
@@ -72,10 +76,9 @@ def post_addon(env, node_id, provider_id, token, auth=None):
     )
 
 
-def delete_addon(env, node_id, provider_id, token, auth=None):
+def delete_addon(env, node_id, provider_id, token):
     return requests.delete(
         f'{urls[env]}nodes/{node_id}/addons/{provider_id}/',
-        auth=auth,
         headers={
             'Content-Type': 'application/vnd.api+json',
             'Authorization': f'Bearer {token}'

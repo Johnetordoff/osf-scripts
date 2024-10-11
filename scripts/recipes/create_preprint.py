@@ -94,7 +94,6 @@ def print_error(action, response):
 
 def main():
     env = 'staging3'  # Choose the environment: 'production', 'staging', 'staging2', 'staging3', or 'test'
-
     # Step 1: Create a new preprint
     attributes = {
         'title': 'My New Preprint',
