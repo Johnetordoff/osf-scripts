@@ -19,13 +19,17 @@ def create_env_file():
 
 
 def get_credentials():
+    credentials = {}  # Create a dictionary to store credentials
+
     # Check if the environment variables are set, else use fallback values
-    token = os.getenv('TOKEN', 'test_token')  # Fallback to 'test_token' if TOKEN is not found
-    username = os.getenv('USERNAME', 'test_username')  # Fallback to 'test_username'
-    password = os.getenv('PASSWORD', 'test_password')  # Fallback to 'test_password'
+    with open(os.path.join(HERE, '.env'), 'r') as env_file:
+        for line in env_file.read().splitlines():
+            key, value = line.split('=', 1)
+            key = key.strip().lower()  # Make sure the key is in lowercase
+            credentials[key] = value.strip()
 
-    return token, username, password
-
+    # Return the credentials as individual values
+    return credentials.get('token'), credentials.get('username'), credentials.get('password')
 
 token, username, password = get_credentials()
 
