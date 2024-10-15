@@ -62,3 +62,13 @@ def delete_file(env, resource_id, provider_id, file_id, token):
             'Content-Type': 'application/octet-stream',
         }
     )
+
+
+def get_file(env, file_id, token):
+    return requests.get(
+        f'{urls[env]}files/{file_id}/',
+        headers={
+            'Content-Type': 'application/vnd.api+json',
+            'Authorization': f'Bearer {token}'
+        }
+    )
