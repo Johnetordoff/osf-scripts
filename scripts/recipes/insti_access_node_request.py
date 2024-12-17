@@ -45,10 +45,22 @@ def main():
     requested_permissions = "requested_permissions"
     comment = "comment"
     institution_id = "institution_id"  # Replace with the actual institution ID
+    bcc_sender = True
+    reply_to = True
 
     try:
         logging.info(f"Creating an InstitutionalRequest for node ID: {target_node_id} and institution: {institution_id}")
-        response = create_institutional_access_request(env, target_node_id, comment, institution_id, token, message_recipent=message_recipent_id, requested_permissions=requested_permissions, bcc_sender=True, reply_to=True)
+        response = create_institutional_access_request(
+            env,
+            target_node_id,
+            comment,
+            institution_id,
+            token,
+            message_recipient=message_recipent_id,
+            requested_permissions=requested_permissions,
+            bcc_sender=bcc_sender,
+            reply_to=reply_to
+        )
 
         if response.status_code in [200, 201]:  # Success
             log_success("Institutional access request created successfully!", response.json())

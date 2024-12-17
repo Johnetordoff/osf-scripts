@@ -39,17 +39,26 @@ def log_error(action, response=None):
 
 
 def main():
-    env = 'staging3'  # Choose the environment: 'production', 'staging', 'staging2', 'staging3', or 'test'
-    user_id = "user_id"  # Replace with the recipient user ID
-    institution_id = "institution_id"  # Replace with the institution ID
-    message_text = "message_text"  # Replace with your message text
+    env = 'local'  # Choose the environment: 'production', 'staging', 'staging2', 'staging3', or 'test'
+    user_id = "<user_id>"  # Replace with the recipient user ID
+    institution_id = "<institution_id>"  # Replace with the institution ID
+    message_text = "<message_text>"  # Replace with your message text
     message_type = "institutional_request"  # Replace with the appropriate message type
     bcc_sender = True # send to a bcc to the sender to remind them of email
     reply_to = True  # adds a header to the email, so users will know who to reply to.
 
     try:
         logging.info(f"Creating a UserMessage for user ID: {user_id}")
-        response = create_user_message(env, user_id, message_text, message_type, institution_id, token, bcc_sender, reply_to)
+        response = create_user_message(
+            env,
+            user_id,
+            message_text,
+            message_type,
+            institution_id,
+            token,
+            bcc_sender,
+            reply_to
+        )
 
         if response.status_code in [200, 201]:  # Success
             log_success("UserMessage created successfully!", response.json())

@@ -63,8 +63,7 @@ def create_node_request_with_permission(env, target_id, comment, requested_permi
     )
 
 
-def create_institutional_access_request(env, target_id, comment, institution_id, token,
-                                        bcc_sender=True, reply_to=True, message_recipent=None, requested_permissions=None,
+def create_institutional_access_request(env, target_id, comment, institution_id, token, bcc_sender=False, reply_to=False, message_recipient=None, requested_permissions=None,
                                         ):
     """Creates an institutional access request for a specific target node."""
     payload = {
@@ -87,12 +86,12 @@ def create_institutional_access_request(env, target_id, comment, institution_id,
             }
         }
     }
-    if message_recipent:
+    if message_recipient:
         payload['data']['relationships'].update(
             {
                 'message_recipient': {
                     'data': {
-                            'id': message_recipent,
+                            'id': message_recipient,
                             'type': 'users'
                         }
                 }

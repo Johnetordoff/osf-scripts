@@ -45,7 +45,13 @@ def main():
 
     try:
         logging.info(f"Creating a NodeRequest for node ID: {target_node_id} with permissions: {requested_permissions}")
-        response = create_node_request_with_permission(env, target_node_id, comment, requested_permissions, token)
+        response = create_node_request_with_permission(
+            env,
+            target_node_id,
+            comment,
+            requested_permissions,
+            token
+        )
 
         if response.status_code in [200, 201]:  # Success
             log_success("NodeRequest with permissions created successfully!", response.json())
